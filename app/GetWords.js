@@ -17,6 +17,8 @@ async function getText(){
     })
 }
 
+const aSentence = "I’m glad you’re on the other side of this glass screen. Using this laptop the mouse is my avatar, clicking and scrolling for utilitarian means. Most use their devices in an automated way, without reflecting on their gestures. Let’s defamiliarize our tools and use them as a vehicle for contemplation."
+
 function scramble(array){
     for(let i = 0; i < array.length; i++){
         const randomIndex = Math.floor(Math.random() * array.length);
@@ -35,6 +37,8 @@ async function posPoem(){
     const posTypesVB = ["VB"];
     const tokensVB = [];
 
+    let uniqArray;
+
     paragraphs.forEach(pg => {
         const cleanpg = cleanText(pg);
         const sentences = sbd.sentences(cleanpg);
@@ -52,9 +56,11 @@ async function posPoem(){
                 scramble(tokensVB);
             });
         });
+        uniqArray = Array.from(new Set(tokensVB));
+        scramble(uniqArray);
     });
 
-    return tokensVB.slice(0, 10);
+    return uniqArray.slice(0,11);
 }
 
 function mode(arr){
